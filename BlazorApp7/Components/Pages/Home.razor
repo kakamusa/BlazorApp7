@@ -1,0 +1,29 @@
+﻿@page "/"
+@using BlazorApp7.Components.Test
+
+<PageTitle>Home</PageTitle>
+ 
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+<table border="1">
+    <tr>
+        <th style="border: solid black 1px;">Code</th>
+        <th style="border: solid black 1px;">Desc</th>
+    </tr>
+    @foreach (var row in list)
+    {
+        <tr>
+            <th style="border: solid black 1px;">@row.Ancode</th>
+            <th style="border: solid black 1px;">@row.Andsc</th>
+        </tr>
+    }
+</table>
+@code
+{
+    IEnumerable<AnalysisMdl> list = new List<AnalysisMdl>();
+    protected override async Task OnInitializedAsync()
+    {
+        list = await new AnalysisService().GetAll();
+    }
+}
