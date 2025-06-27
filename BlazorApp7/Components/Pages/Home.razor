@@ -34,7 +34,7 @@ Welcome to your new app.
 @code
 {
     IEnumerable<AnalysisMdl> list = new List<AnalysisMdl>();
-    Login mdl = new Login { Ancode = "ancode", Andsc = "andsc" };
+    Login mdl = new Login { Ancode = "0001", Andsc = "0002" };
     protected override async Task OnInitializedAsync()
     {
         await Submit();
@@ -42,7 +42,7 @@ Welcome to your new app.
     private async Task Submit()
     {
         string dbcode = "s";
-        list = await new AnalysisService().GetAll(dbcode, string.IsNullOrEmpty(mdl.Ancode) ? "ancode" : mdl.Ancode, string.IsNullOrEmpty(mdl.Andsc) ? "andsc" : mdl.Andsc);
+        list = await new AnalysisService().GetAll(dbcode, string.IsNullOrEmpty(mdl.Ancode) ? "0001" : mdl.Ancode, string.IsNullOrEmpty(mdl.Andsc) ? "0002" : mdl.Andsc);
     }
     class Login
     {

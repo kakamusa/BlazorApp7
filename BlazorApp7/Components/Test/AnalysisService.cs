@@ -9,10 +9,8 @@ namespace BlazorApp7.Components.Test
         string Table(string dbcode) => "sp_analysi" + dbcode; 
         public async Task<IEnumerable<AnalysisMdl>> GetAll(string dbcode, string field1, string field2)
         {
-            string[] arr = ["0001", "0002", "0003"]; 
             var param = new DynamicParameters();
-            param.Add("@ancodes", arr.ToList());
-            string sql = "SELECT " + field1 + "," + field2 + " FROM " + Table(dbcode) + " WHERE ancode in @ancodes;";
+            string sql = "SELECT * FROM " + Table(dbcode) + " WHERE(ancode='" + field1 + "' || ancode='" + field2 +"');";
             using (var conn = new MySqlConnection("Server=localhost;Port=3310;Userid=root;Password=SUNPRO100#;Database=SUNPRODB;Sslmode=none;"))
                 return await conn.QueryAsync<AnalysisMdl>(sql, param);
         }
