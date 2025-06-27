@@ -4,6 +4,18 @@
 <PageTitle>Home</PageTitle>
  
 <h1>Hello, world!</h1>
+<EditForm Model=@mdl OnSubmit="Submit">
+    <div class="form-group">
+        <label for="Name">Name</label>
+        <InputText @bind-Value=mdl.Ancode class="form-control" id="Name" />
+    </div>
+    <div class="form-group">
+        <label for="Age">Age</label>
+        <InputText @bind-Value=mdl.Andsc class="form-control" id="Age" />
+    </div>
+    <input type="submit" class="btn btn-primary" value="Save" />
+</EditForm>
+
 
 Welcome to your new app.
 <table border="1">
@@ -22,9 +34,19 @@ Welcome to your new app.
 @code
 {
     IEnumerable<AnalysisMdl> list = new List<AnalysisMdl>();
+    Login mdl = new Login { Ancode = "ancode", Andsc = "andsc" };
     protected override async Task OnInitializedAsync()
     {
+        await Submit();
+    }
+    private async Task Submit()
+    {
         string dbcode = "s";
-        list = await new AnalysisService().GetAll(dbcode, "ancode", "andsc");
+        list = await new AnalysisService().GetAll(dbcode, string.IsNullOrEmpty(mdl.Ancode) ? "ancode" : mdl.Ancode, string.IsNullOrEmpty(mdl.Andsc) ? "andsc" : mdl.Andsc);
+    }
+    class Login
+    {
+        public string Ancode { get; set; }
+        public string Andsc { get; set; }
     }
 }
