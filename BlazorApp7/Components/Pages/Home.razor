@@ -24,6 +24,7 @@ Welcome to your new app.
     IEnumerable<AnalysisMdl> list = new List<AnalysisMdl>();
     protected override async Task OnInitializedAsync()
     {
-        list = await new AnalysisService().GetAll();
+        string dbcode = "s";
+        list = await new AnalysisService().GetAll(dbcode);
     }
 }
