@@ -25,6 +25,6 @@ Welcome to your new app.
     protected override async Task OnInitializedAsync()
     {
         string dbcode = "s";
-        list = await new AnalysisService().GetAll(dbcode);
+        list = await new AnalysisService().GetAll(dbcode, "ancode", "andsc");
     }
 }
